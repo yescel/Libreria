@@ -7,7 +7,7 @@ public class SeguridadUsuarios extends javax.swing.JFrame {
    String user;
     String contra;
     int acmd =0;
-    
+    // hola a todos
     Connection conexion = null;
     PreparedStatement pstm = null;
     Statement sent;
