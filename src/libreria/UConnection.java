@@ -11,7 +11,7 @@ public class UConnection {
 		
 		String usr = "";
 		String pwd = "";
-		String url = "jdbc:sqlite:C:/Users/Public/Documents/SQL administrador/Zapateria.s3db";
+		String url = "jdbc:sqlite:C:/Users/Public/Documents/SQL administrador/ProyectoLibro.s3db";
 		String driver = "org.sqlite.JDBC";
 		
 		Class.forName(driver);

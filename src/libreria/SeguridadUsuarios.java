@@ -1,11 +1,17 @@
 package libreria;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import java.sql.*;
 
 public class SeguridadUsuarios extends javax.swing.JFrame {
-    String user = "user";
-    String admin = "admin";
+   String user;
+    String contra;
     int acmd =0;
+    
+    Connection conexion = null;
+    PreparedStatement pstm = null;
+    Statement sent;
+    ResultSet rs = null;
     
     public SeguridadUsuarios() {
         initComponents();
@@ -102,6 +108,19 @@ public class SeguridadUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+            
+            try{
+                conexion = UConnection.getConnection();
+            String sql ="SELECT * FROM Usuario WHERE Nombre='"+this.txtUsuario.getText()+"'";
+                sent= conexion.createStatement();
+                ResultSet rs= sent.executeQuery(sql);
+                rs.next();
+                user=rs.getString("Nombre");
+                contra=rs.getString("Clave");
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        
         
             if (String.valueOf(txtUsuario.getText()).compareTo("") == 0 && String.valueOf(pswContraseña.getPassword()).compareTo("") == 0) {
                 JOptionPane.showMessageDialog(rootPane, "Los parametros estan vacios");
@@ -124,7 +143,7 @@ public class SeguridadUsuarios extends javax.swing.JFrame {
                      dispose();
                  }
                     } else {
-                        if (String.valueOf(txtUsuario.getText()).compareTo(user) == 0 && String.valueOf(pswContraseña.getText()).compareTo(admin) == 0) {
+                        if (String.valueOf(txtUsuario.getText()).compareTo(user) == 0 && String.valueOf(pswContraseña.getText()).compareTo(contra) == 0) {
                             FormUsuario obj= new FormUsuario();
                             obj.setVisible(true);
                             dispose();
